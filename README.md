@@ -15,6 +15,12 @@ and 5 methods available to you:
 
 Believe it or not, that's it!
 
+# Installation
+
+```
+composer require "ilya/little:0.9"
+```
+
 # License
 
 The MIT license, check out the `LICENSE` file. 
