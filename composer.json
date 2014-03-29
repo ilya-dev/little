@@ -1,0 +1,17 @@
+{
+    "name": "ilya/little",
+    "description": "Laughably simple IoC container",
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya S",
+            "email": "public.ilya.s@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": ["src/Little.php"]
+    }
+}
