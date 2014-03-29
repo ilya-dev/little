@@ -85,7 +85,7 @@ class LittleSpec extends ObjectBehavior {
              ->shouldBeAnInstanceOf($class);
     }
 
-    function it_throws_an_exception_if_a_given_class_is_not_instantiable()
+    function it_throws_an_exception_if_a_given_class_does_not_exist()
     {
         $class = 'class'.rand();
 
@@ -95,6 +95,13 @@ class LittleSpec extends ObjectBehavior {
     function it_throws_an_exception_if_a_given_class_has_unresolvable_dependencies()
     {
         $this->shouldThrow('LittleException')->duringMake('UnresolvableClass');
+    }
+
+    function it_throws_an_exception_if_a_given_class_is_not_instantiable()
+    {
+        // ensure that the given class is not an abstract class or an interface
+        // and it has a public constructor or does not have any at all
+        $this->shouldThrow('LittleException')->duringMake('UninstantiableClass');
     }
 
 }
@@ -118,4 +125,6 @@ class UnresolvableClass {
     }
 
 }
+
+abstract class UninstantiableClass {   }
 
