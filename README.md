@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ilya-dev/little.svg?branch=master)](https://travis-ci.org/ilya-dev/little)
+
 **Little** is a very small IoC container written in PHP just for fun. This project is heavily inspired by the Laravel IoC container.
 
 **Little** supports automatic dependency resolution, singletons and binding existing instances into the container.
@@ -12,6 +14,12 @@ and 5 methods available to you:
 + `boolean bound(string $abstract)`
 
 Believe it or not, that's it!
+
+# Installation
+
+```
+composer require "ilya/little:0.9"
+```
 
 # License
 
