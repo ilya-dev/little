@@ -21,6 +21,14 @@ Believe it or not, that's it!
 composer require "ilya/little:0.9"
 ```
 
+# Examples
+
+Check out the `examples` folder. To run the demo, type:
+
+```
+php examples/demo.php
+```
+
 # License
 
 The MIT license, check out the `LICENSE` file. 
