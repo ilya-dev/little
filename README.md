@@ -18,7 +18,7 @@ Believe it or not, that's it!
 # Installation
 
 ```
-composer require "ilya/little:0.9"
+composer require "ilya/little:~1"
 ```
 
 # Examples
