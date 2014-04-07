@@ -1,6 +1,6 @@
 <?php
 
-class Little {
+class Little implements ArrayAccess {
 
     /**
      * The container's bindings
@@ -205,6 +205,51 @@ class Little {
         }
 
         throw new LittleException("Unresolvable dependency $parameter");
+    }
+
+    /**
+     * Get an offset
+     *
+     * @param  mixed $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->make($offset);
+    }
+
+    /**
+     * Set an offset
+     *
+     * @param  mixed $offset
+     * @param  mixed $value
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        return $this->bind($offset, $value);
+    }
+
+    /**
+     * Determine whether an offset exists
+     *
+     * @param  mixed   $offset
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return $this->bound($offset);
+    }
+
+    /**
+     * Unset an offset
+     *
+     * @param  mixed $offset
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->instances[$offset], $this->bindings[$offset]);
     }
 
 }
