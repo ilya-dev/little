@@ -109,6 +109,18 @@ class LittleSpec extends ObjectBehavior {
         $this->shouldImplement('ArrayAccess');
     }
 
+    function it_allows_you_to_create_a_shared_closure()
+    {
+        $closure = $this->share(function($app)
+        {
+            return $app->make('spec\DummyClass');
+        });
+
+        $this->bind('bar', $closure);
+
+        $this->make('bar')->shouldBeEqualTo($this->make('bar'));
+    }
+
 }
 
 class DummyClass {}

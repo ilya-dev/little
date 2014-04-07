@@ -87,6 +87,27 @@ class Little implements ArrayAccess {
     }
 
     /**
+     * Wrap a closure so it is shared
+     *
+     * @param  \Closure $closure
+     * @return \Closure
+     */
+    public function share(Closure $closure)
+    {
+        return function($app) use($closure)
+        {
+            static $instance;
+
+            if (is_null($instance))
+            {
+                $instance = $closure($app);
+            }
+
+            return $instance;
+        };
+    }
+
+    /**
      * Determine if the given abstract type has been bound
      *
      * @param  string  $abstract
