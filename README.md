@@ -11,6 +11,7 @@ and 5 methods available to you:
 + `mixed make(string $abstract)`
 + `void singleton(string $abstract, string|Closure $concrete)`
 + `void instance(string $abstract, mixed $instance)`
++ `Closure share(Closure $closure)`
 + `boolean bound(string $abstract)`
 
 Believe it or not, that's it!
