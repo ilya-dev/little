@@ -104,6 +104,11 @@ class LittleSpec extends ObjectBehavior {
         $this->shouldThrow('LittleException')->duringMake('UninstantiableClass');
     }
 
+    function it_should_implement_ArrayAccess_contract()
+    {
+        $this->shouldImplement('ArrayAccess');
+    }
+
 }
 
 class DummyClass {}
