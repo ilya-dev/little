@@ -3,28 +3,28 @@
 class Little implements ArrayAccess {
 
     /**
-     * The container's bindings
+     * The container's bindings.
      *
      * @var array
      */
     protected $bindings = [];
 
     /**
-     * The container's shared instances
+     * The container's shared instances.
      *
      * @var array
      */
     protected $instances = [];
 
     /**
-     * Resolve the given type from the container
+     * Resolve the given type from the container.
      *
-     * @param  string $abstract
+     * @param string $abstract
      * @return mixed
      */
     public function make($abstract)
     {
-        if (isset($this->instances[$abstract]))
+        if (isset ($this->instances[$abstract]))
         {
             return $this->instances[$abstract];
         }
@@ -40,16 +40,16 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Bind a type into the container
+     * Bind a type into the container.
      *
-     * @param  string          $abstract
-     * @param  string|Closure  $concrete
-     * @param  boolean         $shared
+     * @param string $abstract
+     * @param string|Closure $concrete
+     * @param boolean $shared
      * @return void
      */
     public function bind($abstract, $concrete, $shared = false)
     {
-        unset($this->instances[$abstract]);
+        unset ($this->instances[$abstract]);
 
         if ( ! $concrete instanceof Closure)
         {
@@ -63,10 +63,10 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Bind a shared type into the container
+     * Bind a shared type into the container.
      *
-     * @param  string         $abstract
-     * @param  string|Closure $concrete
+     * @param string $abstract
+     * @param string|Closure $concrete
      * @return void
      */
     public function singleton($abstract, $concrete)
@@ -75,10 +75,10 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Bind an existing instance into the container
+     * Bind an existing instance into the container.
      *
-     * @param  string $abstract
-     * @param  mixed  $instance
+     * @param string $abstract
+     * @param mixed $instance
      * @return void
      */
     public function instance($abstract, $instance)
@@ -87,10 +87,10 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Wrap a closure so it is shared
+     * Wrap a closure so it is shared.
      *
-     * @param  \Closure $closure
-     * @return \Closure
+     * @param Closure $closure
+     * @return Closure
      */
     public function share(Closure $closure)
     {
@@ -108,38 +108,38 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Determine if the given abstract type has been bound
+     * Determine if the given abstract type has been bound.
      *
-     * @param  string  $abstract
+     * @param string $abstract
      * @return boolean
      */
     public function bound($abstract)
     {
-        return isset($this->bindings[$abstract])
-            or isset($this->instances[$abstract]);
+        return isset ($this->bindings[$abstract])
+            or isset ($this->instances[$abstract]);
     }
 
     /**
-     * Determine whether a given abstract type is shared
+     * Determine whether a given abstract type is shared.
      *
-     * @param  string  $abstract
+     * @param string $abstract
      * @return boolean
      */
     protected function isShared($abstract)
     {
-        return isset($this->bindings[$abstract])
-           and ($this->bindings[$abstract]['shared'] === true);
+        return isset ($this->bindings[$abstract])
+           and ($this->bindings[$abstract]['shared'] == true);
     }
 
     /**
-     * Get the concrete type for a given abstract type
+     * Get the concrete type for a given abstract type.
      *
-     * @param  string $abstract
+     * @param string $abstract
      * @return mixed
      */
     protected function getConcrete($abstract)
     {
-        if (isset($this->bindings[$abstract]))
+        if (isset ($this->bindings[$abstract]))
         {
             return $this->bindings[$abstract]['concrete'];
         }
@@ -148,9 +148,9 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Instantiate a concrete instance of the given type
+     * Instantiate a concrete instance of the given type.
      *
-     * @param  string $concrete
+     * @param string $concrete
      * @return mixed
      */
     protected function build($concrete)
@@ -164,14 +164,14 @@ class Little implements ArrayAccess {
         {
             $reflector = new ReflectionClass($concrete);
         }
-        catch(ReflectionException $exception)
+        catch (ReflectionException $exception)
         {
             throw new LittleException($exception->getMessage());
         }
 
         if ( ! $reflector->isInstantiable())
         {
-            throw new LittleException("$concrete is not instantiable");
+            throw new LittleException("{$concrete} is not instantiable.");
         }
 
         if (is_null($constructor = $reflector->getConstructor()))
@@ -185,9 +185,9 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Resolve all of the given dependencies
+     * Resolve all of the given dependencies.
      *
-     * @param  array $parameters
+     * @param array $parameters
      * @return array
      */
     protected function getDependencies(array $parameters)
@@ -213,9 +213,9 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Resolve a dependency of a primitive type
+     * Resolve a dependency of a primitive type.
      *
-     * @param  ReflectionParameter $parameter
+     * @param ReflectionParameter $parameter
      * @return mixed
      */
     protected function resolvePrimitive(ReflectionParameter $parameter)
@@ -225,13 +225,13 @@ class Little implements ArrayAccess {
             return $parameter->getDefaultValue();
         }
 
-        throw new LittleException("Unresolvable dependency $parameter");
+        throw new LittleException("Unresolvable dependency {$parameter}.");
     }
 
     /**
-     * Get an offset
+     * Get an offset.
      *
-     * @param  mixed $offset
+     * @param mixed $offset
      * @return mixed
      */
     public function offsetGet($offset)
@@ -240,10 +240,10 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Set an offset
+     * Set an offset.
      *
-     * @param  mixed $offset
-     * @param  mixed $value
+     * @param mixed $offset
+     * @param mixed $value
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -252,9 +252,9 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Determine whether an offset exists
+     * Determine whether an offset exists.
      *
-     * @param  mixed   $offset
+     * @param mixed $offset
      * @return boolean
      */
     public function offsetExists($offset)
@@ -263,17 +263,16 @@ class Little implements ArrayAccess {
     }
 
     /**
-     * Unset an offset
+     * Unset an offset.
      *
-     * @param  mixed $offset
+     * @param mixed $offset
      * @return void
      */
     public function offsetUnset($offset)
     {
-        unset($this->instances[$offset], $this->bindings[$offset]);
+        unset ($this->instances[$offset], $this->bindings[$offset]);
     }
 
 }
 
-class LittleException extends \Exception {  }
-
+class LittleException extends Exception {}
