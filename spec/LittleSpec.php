@@ -9,7 +9,7 @@ class LittleSpec extends ObjectBehavior {
         $this->shouldHaveType('Little');
     }
 
-    function it_allows_you_to_bind_a_type_into_the_container()
+    function it_binds_a_type_into_the_container()
     {
         $this->bind('foo', function()
         {
@@ -29,7 +29,7 @@ class LittleSpec extends ObjectBehavior {
         $this->make('foo')->shouldReturn(true);
     }
 
-    function it_allows_you_to_bind_a_shared_type_into_the_container()
+    function it_binds_a_shared_type_into_the_container()
     {
         $this->singleton('foo', function()
         {
@@ -39,7 +39,7 @@ class LittleSpec extends ObjectBehavior {
         $this->make('foo')->shouldBeEqualTo($this->make('foo'));
     }
 
-    function it_allows_you_to_bind_an_existing_instance_into_the_container()
+    function it_binds_an_existing_instance_into_the_container()
     {
         $dummy = new DummyClass;
 
@@ -60,7 +60,7 @@ class LittleSpec extends ObjectBehavior {
         $this->make('foo')->shouldReturn('bar');
     }
 
-    function it_allows_you_to_determine_whether_the_given_type_has_been_bound()
+    function it_determines_whether_the_given_type_has_been_bound()
     {
         $this->bound('foo')->shouldReturn(false);
         $this->bind('foo', 'bar');
@@ -71,7 +71,7 @@ class LittleSpec extends ObjectBehavior {
         $this->bound('bar')->shouldReturn(true);
     }
 
-    function it_allows_you_to_pass_class_name_as_a_concrete_type()
+    function it_binds_class_name_as_a_concrete_type()
     {
         $this->bind('foo', 'spec\DummyClass');
 
@@ -103,12 +103,12 @@ class LittleSpec extends ObjectBehavior {
         $this->shouldThrow('LittleException')->duringMake('UninstantiableClass');
     }
 
-    function it_should_implement_ArrayAccess_contract()
+    function it_implements_ArrayAccess_contract()
     {
         $this->shouldImplement('ArrayAccess');
     }
 
-    function it_allows_you_to_create_a_shared_closure()
+    function it_creates_a_shared_closure()
     {
         $closure = $this->share(function($app)
         {
@@ -142,5 +142,4 @@ class UnresolvableClass {
 
 }
 
-abstract class UninstantiableClass {   }
-
+abstract class UninstantiableClass {}
